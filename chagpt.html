@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>408gpt 登录注册页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+		.container {
+		        background-color: #fff;
+		        padding: 20px;
+		        border-radius: 5px;
+		        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		        width: 400px;
+		    }
+		    h1 {
+		        text-align: center;
+		    }
+		
+		    input[type="text"],
+		    input[type="password"],
+		    input[type="email"],
+		    input[type="tel"] {
+		        width: 100%;
+		        padding: 10px;
+		        margin: 10px 0;
+		        border: 1px solid #ccc;
+		        border-radius: 3px;
+		    }
+		
+		    button {
+		        width: 100%;
+		        padding: 10px;
+		        background-color: #007bff;
+		        border: none;
+		        border-radius: 3px;
+		        color: #fff;
+		        cursor: pointer;
+		    }
+		
+		    button:hover {
+		        background-color: #0056b3;
+		    }
+		
+		    .switch {
+		        text-align: center;
+		        margin-top: 10px;
+		    }
+		
+		    .switch a {
+		        color: #007bff;
+		        text-decoration: none;
+		    }
+		</style>
+		</head>
+		<body>
+		    <div class="container">
+		        <h1>登录</h1>
+		        <form id="login-form">
+		            <input type="text" name="username" placeholder="邮箱/手机号" required>
+		            <input type="password" name="password" placeholder="密码" required>
+		            <button type="submit" onclick="window.location.href='main.html';">登录</button>
+		        </form>
+		        <div class="switch">
+		            没有账号？<a href="#" onclick="switchToSignup()">点击注册</a>
+		        </div>
+		    </div>
+			<script>
+			    function switchToSignup() {
+			        const container = document.querySelector(".container");
+			        container.innerHTML = `
+			            <h1>注册</h1>
+			            <form id="signup-form">
+			                <input type="text" name="username" placeholder="用户名" required>
+			                <input type="email" name="email" placeholder="邮箱" required>
+			                <input type="tel" name="phone" pattern="[0-9]{11}" placeholder="手机号" required>
+			                <input type="password" name="password" placeholder="密码" required>
+			                <button type="submit">注册</button>
+			            </form>
+			            <div class="switch">
+			                已有账号？<a href="#" onclick="switchToLogin()">点击登录</a>
+			            </div>
+			        `;
+			    }
+			
+			    function switchToLogin() {
+			        const container = document.querySelector(".container");
+			        container.innerHTML = `
+			            <h1>登录</h1>
+			            <form id="login-form">
+			                <input type="text" name="username" placeholder="邮箱/手机号" required>
+			                <input type="password" name="password" placeholder="密码" required>
+			                <button type="submit" onclick="location.href='main.html'">登录</button>
+			            </form>
+			            <div class="switch">
+			                没有账号？<a href="#" onclick="switchToSignup()">点击注册</a>
+            </div>;
+}
+</script>
+</body>
+</html>

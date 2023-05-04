@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语作文批改</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dialogue {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .dialogue .bubble {
+            max-width: 70%;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            word-break: break-word;
+        }
+
+        .dialogue .bubble.right {
+            align-self: flex-end;
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .dialogue .bubble:last-child {
+            margin-bottom: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="essay-form">
+            <label for="essay">输入您的文章：</label>
+            <textarea id="essay" required></textarea>
+            <button type="submit">提交</button>
+        </form>
+        <div class="dialogue"></div>
+    </div>
+    <script>
+        const essayForm = document.getElementById('essay-form');
+
+        essayForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const essay = document.getElementById('essay').value;
+
+            // 发送Ajax请求
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://api.chatgpt.com/essay-correction');
+            xhr.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // 解析返回的数据
+                    const response = JSON.parse(xhr.responseText);
+                    const { input, output } = response;
+
+                    // 显示对话框
+                    const dialogue = document.querySelector('.dialogue');
+					dialogue.innerHTML += <div class="bubble">${input}</div> <div class="bubble right">${output}</div> ;
+					// 将页面滚动到最底部
+					window.scrollTo(0, document.body.scrollHeight);
+					} else {
+					console.error(xhr.statusText);
+					}
+					};
+					xhr.onerror = function () {
+					console.error(xhr.statusText);
+					};
+					xhr.send(JSON.stringify({ essay }));
+					});
+					</script>
+					
+					   </body>
+					</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考研日记</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            outline: none;
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            width: 150px;
+            align-self: center;
+            background-color: #333;
+            color: #FFF;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        .entries {
+            margin-top: 40px;
+        }
+
+        .entry {
+            background-color: #FFF;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+		 .entry-date {
+		            font-size: 0.8em;
+		            font-weight: bold;
+		            color: #666;
+		            margin-bottom: 10px;
+		        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>考研日记</h1>
+        <form id="diaryForm">
+            <label for="diaryEntry">今天的日记：</label>
+            <textarea id="diaryEntry" name="diaryEntry"></textarea>
+            <button type="submit">保存</button>
+        </form>
+        <div class="entries" id="entries">
+            <!-- 在这里显示日记条目 -->
+        </div>
+    </div>
+    <script>
+        const diaryForm = document.getElementById("diaryForm");
+        const entriesElement = document.getElementById("entries");
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+
+            return `${year}-${month}-${day}`;
+        }
+
+        function loadEntries() {
+            const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+            entriesElement.innerHTML = "";
+            entries.forEach((entry) => {
+                const entryElement = document.createElement("div");
+                entryElement.classList.add("entry");
+
+                const entryDateElement = document.createElement("div");
+                entryDateElement.classList.add("entry-date");
+                entryDateElement.textContent = formatDate(new Date(entry.date));
+                entryElement.appendChild(entryDateElement);
+
+                const entryContentElement = document.createElement("div");
+                entryContentElement.textContent = entry.content;
+                entryElement.appendChild(entryContentElement);
+
+                entriesElement.appendChild(entryElement);
+            });
+        }
+
+        diaryForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const diaryEntry = document.getElementById("diaryEntry").value;
+            if (!diaryEntry.trim()) return;
+
+            const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+            entries.push({
+                date: new Date().toISOString(),
+                content: diaryEntry
+            });
+            localStorage.setItem("diaryEntries", JSON.stringify(entries));
+
+            document.getElementById("diaryEntry").value = "";
+            loadEntries();
+        });
+
+        loadEntries();
+    </script>
+</body>
+    </html>
+

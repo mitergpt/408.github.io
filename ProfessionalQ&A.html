@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业课答疑页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            width: 150px;
+            align-self: center;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>专业课答疑页面</h1>
+        <form id="questionForm">
+            <label for="question">请在此处输入您的问题：</label>
+            <textarea id="question" name="question"></textarea>
+            <button type="submit">提交问题</button>
+        </form>
+        <div id="output">
+            <h2>答案：</h2>
+            <p id="answer"></p>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById("questionForm");
+        const answerElement = document.getElementById("answer");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const question = document.getElementById("question").value;
+            // 在这里添加处理问题并返回答案的逻辑，例如调用 API 或使用预定义的数据
+            const answer = `这里是针对问题 "${question}" 的答案。请根据需要替换此文本。`;//后期使用ajax返回输出的文本
+            answerElement.textContent = answer;
+        });
+    </script>
+</body>
+</html>

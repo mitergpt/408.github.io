@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读理解测试</title>
+    <style>
+        textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>阅读理解测试</h1>
+    
+    <form id="readingComprehensionForm">
+        <label for="articleInput">请输入文章内容：</label>
+        <textarea id="articleInput" rows="10"></textarea>
+        
+        <label for="questionInput">请输入问题：</label>
+        <textarea id="questionInput" rows="5"></textarea>
+        
+        <label for="optionInput">请输入选项（每行一个选项）：</label>
+        <textarea id="optionInput" rows="5"></textarea>
+        
+        <input type="button" value="提交" onclick="outputReadingComprehensionProcess()">
+    </form>
+    
+    <h2>阅读理解过程：</h2>
+    <div id="output">
+        <!-- 这里将输出阅读理解过程 -->
+    </div>
+    
+    <script>
+        function outputReadingComprehensionProcess() {
+            const article = document.getElementById("articleInput").value;
+            const question = document.getElementById("questionInput").value;
+            const options = document.getElementById("optionInput").value.split('\n');
+            const outputDiv = document.getElementById("output");
+            
+            outputDiv.innerHTML = "<p>文章：<br>" + article + "</p>" +
+                                  "<p>问题：<br>" + question + "</p>" +
+                                  "<p>选项：</p><ul>";
+                                  
+            for (let i = 0; i < options.length; i++) {
+                outputDiv.innerHTML += "<li>" + options[i].trim() + "</li>";
+            }
+            
+            outputDiv.innerHTML += "</ul>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题求解</title>
+    <style>
+        textarea, input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>问题求解</h1>
+    
+    <form id="problemSolvingForm">
+        <label for="problemInput">请输入问题：</label>
+        <textarea id="problemInput" rows="5"></textarea>
+        
+        <input type="button" value="提交" onclick="outputSolvingProcess()">
+    </form>
+    
+    <h2>求解过程：</h2>
+    <div id="output">
+        <!-- 这里将输出求解过程 -->
+    </div>
+    
+    <script>
+        function outputSolvingProcess() {
+            const problem = document.getElementById("problemInput").value;
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<p>问题：<br>" + problem + "</p>" +
+                                  "<p>求解过程：</p>" +
+                                  "<p>此处应该显示具体的求解过程</p>";//这里后期根据后台代码，返回解析的结果。
+        }
+    </script>
+</body>
+</html>

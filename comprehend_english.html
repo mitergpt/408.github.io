@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语阅读解析</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 150px;
+            align-self: center;
+            background-color: #333;
+            color: #FFF;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        .analysis {
+            background-color: #FFF;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 1.2em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>英语阅读解析</h1>
+        <form id="analysisForm">
+            <label for="reading">输入英语阅读原文：</label>
+            <textarea id="reading" name="reading" required></textarea>
+            <label for="questions">输入题目和选项：</label>
+            <textarea id="questions" name="questions" required></textarea>
+            <button type="submit">获取解析</button>
+        </form>
+        <div class="analysis" id="analysis">
+            <!-- 解析结果将显示在这里 -->
+        </div>
+    </div>
+    <script>
+        document.getElementById("analysisForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            // 这里仅提供一个模拟解析结果，实际解析功能需要后端服务器支持
+            const mockAnalysis = "这是一个模拟的解析结果。实际解析功能需要后端服务器支持。";
+
+            const analysisElement = document.getElementById("analysis");
+            analysisElement.textContent = mockAnalysis;
+            analysisElement.style.display = "block";
+        });
+    </script>
+</body>
+</html>
